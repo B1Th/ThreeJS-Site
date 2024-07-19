@@ -2,8 +2,6 @@ import "./style.css";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
-// Setup
-
 const scene = new THREE.Scene();
 
 const camera = new THREE.PerspectiveCamera(
@@ -23,8 +21,6 @@ camera.position.setZ(30);
 camera.position.setX(-3);
 
 renderer.render(scene, camera);
-
-// Torus
 
 const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
 const material = new THREE.MeshStandardMaterial({ color: 0xff6347 });
@@ -109,15 +105,13 @@ function moveCamera() {
   bhuwan.rotation.y += 0.01;
   bhuwan.rotation.z += 0.01;
 
-  camera.position.z = t * -0.01;
+  camera.position.z = 30 + t * -0.01;
   camera.position.x = t * -0.0002;
   camera.rotation.y = t * -0.0002;
 }
 
 document.body.onscroll = moveCamera;
 moveCamera();
-
-// Animation Loop
 
 function animate() {
   requestAnimationFrame(animate);
