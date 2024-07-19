@@ -27,16 +27,13 @@ const material = new THREE.MeshStandardMaterial({ color: 0xff6347 });
 const torus = new THREE.Mesh(geometry, material);
 
 scene.add(torus);
-
-// Lights
+torus.position.set(10, 0, 0);
 
 const pointLight = new THREE.PointLight(0xffffff);
 pointLight.position.set(5, 5, 5);
 
 const ambientLight = new THREE.AmbientLight(0xffffff);
 scene.add(pointLight, ambientLight);
-
-// Helpers
 
 // const lightHelper = new THREE.PointLightHelper(pointLight)
 // const gridHelper = new THREE.GridHelper(200, 50);
@@ -59,23 +56,17 @@ function addStar() {
 
 Array(200).fill().forEach(addStar);
 
-// Background
-
 const spaceTexture = new THREE.TextureLoader().load("space.jpg");
 scene.background = spaceTexture;
 
-// Avatar
-
-const jeffTexture = new THREE.TextureLoader().load("profile.png");
+const bhuwanTexture = new THREE.TextureLoader().load("profile.png");
 
 const bhuwan = new THREE.Mesh(
   new THREE.BoxGeometry(3, 3, 3),
-  new THREE.MeshBasicMaterial({ map: jeffTexture })
+  new THREE.MeshBasicMaterial({ map: bhuwanTexture })
 );
 
 scene.add(bhuwan);
-
-// Moon
 
 const moonTexture = new THREE.TextureLoader().load("moon.jpg");
 const normalTexture = new THREE.TextureLoader().load("normal.jpg");
@@ -93,21 +84,20 @@ scene.add(moon);
 moon.position.z = 30;
 moon.position.setX(-10);
 
-bhuwan.position.z = -5;
-bhuwan.position.x = 2;
+bhuwan.position.set(10, 0, 0);
 
 function moveCamera() {
   const t = document.body.getBoundingClientRect().top;
-  moon.rotation.x += 0.05;
-  moon.rotation.y += 0.075;
-  moon.rotation.z += 0.05;
+  moon.rotation.x += 0.004;
+  moon.rotation.y += 0.0075;
+  moon.rotation.z += 0.0005;
 
   bhuwan.rotation.y += 0.01;
   bhuwan.rotation.z += 0.01;
 
-  camera.position.z = 30 + t * -0.01;
+  camera.position.z = 30 + t * -0.006;
   camera.position.x = t * -0.0002;
-  camera.rotation.y = t * -0.0002;
+  camera.rotation.y = t * -0.00001;
 }
 
 document.body.onscroll = moveCamera;
